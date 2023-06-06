@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # filename: main.py
 #run python main.py 42.192.17.155:80
+#run python main.py 18.178.47.106:80
 #install pillow opencv-python
 import web
 from handle_2_0 import Handle

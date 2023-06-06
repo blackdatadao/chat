@@ -1,25 +1,25 @@
 # -*- coding: utf-8 -*-
 # filename: media.py
-from basic import Basic
+# from basic import Basic
 import json
 import requests,web
 from datetime import datetime
 from datetime import timedelta
 
-def get_access_token_database():
-    db = web.database(dbn='mysql', db='wechat', user='root',pw='12345678')
-    results = db.query("SELECT * from wechat.token where id=1").cursor._rows
-    exp_time_date=datetime.strptime(results[0][2],"%Y%m%d%H%M%S")
-    # print(exp_time_date)
-    if datetime.now()<exp_time_date-timedelta(0,20):
-        accessToken=results[0][1]
-        return accessToken
-    else:
-        accessToken,exp_in = Basic().get_access_token()
-        exp_time_str=(datetime.now()+timedelta(0,exp_in)).strftime("%Y%m%d%H%M%S")
-        db.query("UPDATE wechat.token SET token=$actoken,exptime=$exp_time_str where id=1",
-            vars={'actoken':accessToken,'exp_time_str':exp_time_str})
-        return accessToken
+# def get_access_token_database():
+#     db = web.database(dbn='mysql', db='wechat', user='root',pw='12345678')
+#     results = db.query("SELECT * from wechat.token where id=1").cursor._rows
+#     exp_time_date=datetime.strptime(results[0][2],"%Y%m%d%H%M%S")
+#     # print(exp_time_date)
+#     if datetime.now()<exp_time_date-timedelta(0,20):
+#         accessToken=results[0][1]
+#         return accessToken
+#     else:
+#         accessToken,exp_in = Basic().get_access_token()
+#         exp_time_str=(datetime.now()+timedelta(0,exp_in)).strftime("%Y%m%d%H%M%S")
+#         db.query("UPDATE wechat.token SET token=$actoken,exptime=$exp_time_str where id=1",
+#             vars={'actoken':accessToken,'exp_time_str':exp_time_str})
+#         return accessToken
 
 class Media(object):
     def __init__(self):
